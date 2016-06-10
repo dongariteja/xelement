@@ -31,6 +31,9 @@ The main class is XElement which represents the parsed xml, all elements in the 
 	xeleCatalog = xelement.Parse(xmlString); //parses the xmlString to XElement object representing complete xml element tree
 ```
 
+### Example Xml
+You can find sample xml at [here][SampleXml]
+
 ### Methods
 -----
 #### descendants(name, ignoreCase) 
@@ -255,3 +258,4 @@ Please feel free to post your comments on [Twitter][twitter] and issues on [gith
 [twitter]: https://twitter.com/dongariteja
 [sax]: https://github.com/isaacs/sax-js
 [githubIssues]: https://github.com/dongariteja/xelement/issues
+[SampleXml]: https://github.com/dongariteja/xelement/blob/master/sampledata.xml
