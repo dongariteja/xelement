@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/dongariteja/xelement.svg?branch=master)](https://travis-ci.org/dongariteja/xelement)
+
 # xelement
 #### _A powerful xelement (Xml Element) class to parse xml for JavaScript._
 ***
