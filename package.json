@@ -1,6 +1,6 @@
 {
   "name": "xelement",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A powerful xelement (Xml Element) class for JavaScript.",
   "main": "lib/xelement.js",
   "author": {
