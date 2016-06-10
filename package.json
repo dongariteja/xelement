@@ -1,0 +1,27 @@
+{
+  "name": "xelement",
+  "version": "1.0.0",
+  "description": "A powerful xelement (Xml Element) class for JavaScript.",
+  "main": "lib/xelement.js",
+  "author": {
+    "name": "Rakesh Dhandra Dharmateja Dongari",
+    "email": "dongariteja@gmail.com",
+    "url" : "https://in.linkedin.com/in/rakeshdongari"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dongariteja/xelement.git"
+  },
+  "dependencies": {
+    "sax": "^1.2.1"
+  },
+  "homepage": "http://dongariteja.github.io/xelement",
+  "readmeFilename": "README.md",
+  "scripts": {
+    "test": "tap test/*.js --cov"
+  },
+  "devDependencies": {
+    "tap": "^5.7.2"
+  },
+  "license": "MIT"
+}
