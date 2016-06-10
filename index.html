@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Xelement : A powerful xelement (Xml Element) class to parse xml for JavaScript">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Xelement</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/dongariteja/xelement">View on GitHub</a>
+
+          <h1 id="project_title">Xelement</h1>
+          <h2 id="project_tagline">A powerful xelement (Xml Element) class to parse xml for JavaScript</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/dongariteja/xelement/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/dongariteja/xelement/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="xelement" class="anchor" href="#xelement" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>xelement</h1>
+
+<h4>
+<a id="a-powerful-xelement-xml-element-class-to-parse-xml-for-javascript" class="anchor" href="#a-powerful-xelement-xml-element-class-to-parse-xml-for-javascript" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><em>A powerful xelement (Xml Element) class to parse xml for JavaScript.</em>
+</h4>
+
+<hr>
+
+<p><code>xelement</code> represents an xml element. You can use this class to create or parse xml string to xml element. It allows to add, edit and delete any element or its attributes within the element tree and serialize the entire element to string from. You can search through the element and can traverse the element tree up and downwards.</p>
+
+<p>The basic building blocks of this module are XElement class and Parser</p>
+
+<ul>
+<li>XElement class represents each element in the xml element tree.</li>
+<li>Parser will create XElement tree from the xml string.</li>
+</ul>
+
+<h3>
+<a id="installation-for-node" class="anchor" href="#installation-for-node" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation for node</h3>
+
+<pre><code>npm install xelement
+</code></pre>
+
+<h3>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h3>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> xelement <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>xelement<span class="pl-pds">'</span></span>);
+    <span class="pl-k">var</span> xeleRoot <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">xelement.Parse</span>(<span class="pl-s"><span class="pl-pds">"</span>&lt;root&gt;&lt;ele1&gt;some value&lt;/ele1&gt;&lt;/root&gt;<span class="pl-pds">"</span></span>);</pre></div>
+
+<h3>
+<a id="class" class="anchor" href="#class" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Class</h3>
+
+<p>The main class is XElement which represents the parsed xml, all elements in the XElement tree from root to leaf element are XElement.</p>
+
+<h4>
+<a id="members" class="anchor" href="#members" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Members</h4>
+
+<ul>
+<li>
+<code>name</code>: name of the element or node name “&lt;root&gt;”. For more information about namespaces please refer to <a href="https://github.com/isaacs/sax-js">sax</a>.</li>
+<li>
+<code>attr</code>: an object represents all attributes of the element. The default value is <code>{}</code>. Ex: - <code>book.attr.id</code> where <code>&lt;book id=”bk108”&gt;</code>
+</li>
+<li>
+<code>value</code>: value of the element.  Ex: - <code>book.value returns</code> “some value”where <code>&lt;book&gt;some value&lt;/book&gt;</code>
+</li>
+<li>
+<code>elements</code>: array of child elements. The default value is <code>[]</code>.</li>
+<li>
+<code>parent</code>: refers to the parent element. Ex: - <code>author.parent.name</code> will return “book” where <code>&lt;book&gt;&lt;author&gt;tj&lt;/author&gt;&lt;/book&gt;</code>
+</li>
+</ul>
+
+<h3>
+<a id="parsedata" class="anchor" href="#parsedata" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Parse(data)</h3>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> fs <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>fs<span class="pl-pds">'</span></span>);
+    <span class="pl-k">var</span> xelement <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>xelement<span class="pl-pds">'</span></span>);
+    <span class="pl-k">var</span> xmlString <span class="pl-k">=</span> <span class="pl-smi">fs</span>.<span class="pl-en">readFileSync</span>(<span class="pl-s"><span class="pl-pds">'</span>./sampledata.xml<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>utf8<span class="pl-pds">'</span></span>);
+    xeleCatalog <span class="pl-k">=</span> <span class="pl-smi">xelement</span>.<span class="pl-en">Parse</span>(xmlString); <span class="pl-c">//parses the xmlString to XElement object representing complete xml element tree</span></pre></div>
+
+<h3>
+<a id="methods" class="anchor" href="#methods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Methods</h3>
+
+<hr>
+
+<h4>
+<a id="descendantsname-ignorecase" class="anchor" href="#descendantsname-ignorecase" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>descendants(name, ignoreCase)</h4>
+
+<p>Returns the array of all descendant element with specified name by default parameter is empty on unspecified and it will return all descendant elements, ignoreCase is the flag whether to ignore the case of the element name, by default set to false. On unsuccessful result it will return [].</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> descs <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">descendants</span>(<span class="pl-s"><span class="pl-pds">'</span>author<span class="pl-pds">'</span></span>, <span class="pl-c1">true</span>);    <span class="pl-c">//returns all elements with “author” name</span></pre></div>
+
+<h4>
+<a id="descendantsandselfname-ignorecase" class="anchor" href="#descendantsandselfname-ignorecase" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>descendantsAndSelf(name, ignoreCase)</h4>
+
+<p>Returns the array of all descendant element with specified name and self by default parameter is empty on unspecified and it will return all descendant elements, ignoreCase is the flag whether to ignore the case of the element name, by default set to false. On unsuccessful result it will return [].</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> descs <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">descendantsAndSelf</span>(<span class="pl-s"><span class="pl-pds">'</span>author<span class="pl-pds">'</span></span>, <span class="pl-c1">true</span>); <span class="pl-c">//returns all elements with “author” name including self</span></pre></div>
+
+<h4>
+<a id="descendantfirstname-ignorecase" class="anchor" href="#descendantfirstname-ignorecase" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>descendantFirst(name, ignoreCase)</h4>
+
+<p>Returns the first descendant element with specified name, name is not optional , ignoreCase is the flag whether to ignore the case of the element name, by default set to false. On unsuccessful result it will undefined.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> descs <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">descendantsFirst</span>(<span class="pl-s"><span class="pl-pds">'</span>author<span class="pl-pds">'</span></span>, <span class="pl-c1">true</span>); <span class="pl-c">//returns the first element with “author” name</span></pre></div>
+
+<h4>
+<a id="ancestorname-ignorecase" class="anchor" href="#ancestorname-ignorecase" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ancestor(name, ignoreCase)</h4>
+
+<p>Returns the ancestor parent with specified name. ignoreCase is the flag whether to ignore the case of the element name, by default set to false. On unsuccessful result it will return undefined.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> author <span class="pl-k">=</span> <span class="pl-smi">xele</span>.<span class="pl-en">descendantsFirst</span>(<span class="pl-s"><span class="pl-pds">'</span>author<span class="pl-pds">'</span></span>);
+    <span class="pl-k">var</span> book <span class="pl-k">=</span> <span class="pl-smi">author</span>.<span class="pl-en">ancestor</span>(<span class="pl-s"><span class="pl-pds">'</span>book<span class="pl-pds">'</span></span>); <span class="pl-c">//returns the book element</span>
+    <span class="pl-k">var</span> catalog<span class="pl-k">=</span> <span class="pl-smi">author</span>.<span class="pl-en">ancestor</span>(<span class="pl-s"><span class="pl-pds">'</span>catalog<span class="pl-pds">'</span></span>);   <span class="pl-c">//return the catalog element</span></pre></div>
+
+<h4>
+<a id="firstelement" class="anchor" href="#firstelement" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>firstElement()</h4>
+
+<p>Returns the first child element, returns undefine if doesn’t exist.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> author <span class="pl-k">=</span> <span class="pl-smi">xele</span>.<span class="pl-en">descendantsFirst</span>(book);
+    <span class="pl-k">var</span> author <span class="pl-k">=</span> <span class="pl-smi">author</span>.<span class="pl-en">firstElement</span>(); <span class="pl-c">//returns the author element</span></pre></div>
+
+<h4>
+<a id="lastelement" class="anchor" href="#lastelement" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>lastElement()</h4>
+
+<p>Returns the last child element, return undefined if doesn’t exist.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> author <span class="pl-k">=</span> <span class="pl-smi">xele</span>.<span class="pl-en">descendantsFirst</span>(book);
+    <span class="pl-k">var</span> description <span class="pl-k">=</span> <span class="pl-smi">author</span>.<span class="pl-en">lastElement</span>(); <span class="pl-c">//returns the description element</span></pre></div>
+
+<h4>
+<a id="siblingsname" class="anchor" href="#siblingsname" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>siblings(name)</h4>
+
+<p>Returns the siblings of the element with specified name, if name unspecified it returns all siblings. Return [] if doesn’t exist.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> author <span class="pl-k">=</span> <span class="pl-smi">xele</span>.<span class="pl-en">descendantsFirst</span>(<span class="pl-s"><span class="pl-pds">'</span>author<span class="pl-pds">'</span></span>);
+    <span class="pl-k">var</span> sl[] <span class="pl-k">=</span> <span class="pl-smi">xele</span>.<span class="pl-en">siblings</span>(); <span class="pl-c">//returns all sibling elements</span></pre></div>
+
+<h4>
+<a id="previoussibling" class="anchor" href="#previoussibling" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>previousSibling()</h4>
+
+<p>Returns the previous sibling of the element, it returns undefined if doesn’t exist.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> fd <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">descendantFirst</span>(<span class="pl-s"><span class="pl-pds">'</span>title<span class="pl-pds">'</span></span>, <span class="pl-c1">true</span>);
+    <span class="pl-k">var</span> ps <span class="pl-k">=</span> <span class="pl-smi">fd</span>.<span class="pl-en">previousSibling</span>();
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">ps</span>.<span class="pl-c1">name</span>); <span class="pl-c">//prints “author”</span>
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">fd</span>.<span class="pl-en">previousSibling</span>().<span class="pl-en">previousSibling</span>()); <span class="pl-c">//prints undefined</span></pre></div>
+
+<h4>
+<a id="nextsibling" class="anchor" href="#nextsibling" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>nextSibling()</h4>
+
+<p>Returns the next sibling of the element, it returns undefined if doesn’t exist.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> fd <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">descendantFirst</span>(<span class="pl-s"><span class="pl-pds">'</span>publish_date<span class="pl-pds">'</span></span>, <span class="pl-c1">true</span>);
+    <span class="pl-k">var</span> ps <span class="pl-k">=</span> <span class="pl-smi">fd</span>.<span class="pl-c1">nextSibling</span>();
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">ps</span>.<span class="pl-c1">name</span>); <span class="pl-c">//prints “description”</span>
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">fd</span>.<span class="pl-c1">nextSibling</span>().<span class="pl-c1">nextSibling</span>()); <span class="pl-c">//prints undefined</span></pre></div>
+
+<h4>
+<a id="index" class="anchor" href="#index" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>index()</h4>
+
+<p>Returns the index of the element among its sibling. Index starts from 0. It returns undefined if the element is not a child other element.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> fd <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-c1">elements</span>.<span class="pl-en">where</span>(<span class="pl-k">function</span> (<span class="pl-smi">o</span>) { <span class="pl-k">return</span> <span class="pl-smi">o</span>.<span class="pl-smi">attr</span>.<span class="pl-c1">id</span> <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">"</span>bk104<span class="pl-pds">"</span></span>; });
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(fd[<span class="pl-c1">0</span>].<span class="pl-c1">index</span>()); <span class="pl-c">//prints 3</span></pre></div>
+
+<h4>
+<a id="setattrname-value" class="anchor" href="#setattrname-value" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>setAttr(name, value)</h4>
+
+<p>Sets the value to specified attribute of the element. If the attribute doesn’t exist, it will create.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> fd <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">descendantFirst</span>(<span class="pl-s"><span class="pl-pds">'</span>book<span class="pl-pds">'</span></span>);
+    <span class="pl-smi">fd</span>.<span class="pl-en">setAttr</span>(<span class="pl-s"><span class="pl-pds">'</span>NewAttr<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>100<span class="pl-pds">'</span></span>);
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">fd</span>.<span class="pl-smi">attr</span>.<span class="pl-smi">NewAttr</span>); <span class="pl-c">//prints “100”   </span></pre></div>
+
+<h4>
+<a id="getattrname" class="anchor" href="#getattrname" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>getAttr(name)</h4>
+
+<p>Returns the value from specified attribute of the element. If the attribute doesn’t exist it will return empty.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> fd <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">descendantFirst</span>(<span class="pl-s"><span class="pl-pds">'</span>book<span class="pl-pds">'</span></span>);
+    <span class="pl-smi">fd</span>.<span class="pl-en">setAttr</span>(<span class="pl-s"><span class="pl-pds">'</span>NewAttr<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>100<span class="pl-pds">'</span></span>);
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">fd</span>.<span class="pl-en">getAttr</span>(<span class="pl-s"><span class="pl-pds">'</span>NewAttr<span class="pl-pds">'</span></span>)); <span class="pl-c">//prints “100” </span>
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">fd</span>.<span class="pl-en">getAttr</span>(<span class="pl-s"><span class="pl-pds">'</span>yyy<span class="pl-pds">'</span></span>)); <span class="pl-c">//prints empty</span></pre></div>
+
+<h4>
+<a id="removeattrname" class="anchor" href="#removeattrname" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>removeAttr(name)</h4>
+
+<p>Remove the specified attribute from the element.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> fd <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">descendantFirst</span>(<span class="pl-s"><span class="pl-pds">'</span>book<span class="pl-pds">'</span></span>);
+    <span class="pl-smi">fd</span>.<span class="pl-en">removeAttr</span>(<span class="pl-s"><span class="pl-pds">'</span>NewAttr<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>100<span class="pl-pds">'</span></span>);
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">fd</span>.<span class="pl-smi">attr</span>.<span class="pl-smi">NewAttr</span>); <span class="pl-c">//prints undefined</span>
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">fd</span>.<span class="pl-en">getAttr</span>(<span class="pl-s"><span class="pl-pds">'</span>NewAttr<span class="pl-pds">'</span></span>)); <span class="pl-c">//prints empty</span></pre></div>
+
+<h4>
+<a id="addobj" class="anchor" href="#addobj" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>add(obj)</h4>
+
+<p>Adds xelement as its child element. Single or array of xelement can be passed. Only valid xelement object will be added and others ignored.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> dummy <span class="pl-k">=</span> {};
+    <span class="pl-smi">xeleCatalog</span>.<span class="pl-c1">add</span>(dummy);<span class="pl-c">//adding invalid object it will ignore     </span>
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">xeleCatalog</span>.<span class="pl-en">lastElement</span>().<span class="pl-smi">attr</span>.<span class="pl-c1">id</span>); <span class="pl-c">//prints “bk112” because the {} object didn’t add to xeleCatalog element.</span>
+
+    <span class="pl-c">//adding single element</span>
+    <span class="pl-k">var</span> newBook <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">xelement.XElement</span>(<span class="pl-s"><span class="pl-pds">"</span>book<span class="pl-pds">"</span></span>);
+    <span class="pl-smi">newBook</span>.<span class="pl-smi">attr</span>.<span class="pl-c1">id</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>bk113<span class="pl-pds">"</span></span>;
+    <span class="pl-smi">xeleCatalog</span>.<span class="pl-c1">add</span>(newBook);
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">xeleCatalog</span>.<span class="pl-en">lastElement</span>().<span class="pl-smi">attr</span>.<span class="pl-c1">id</span>); <span class="pl-c">//prints “bk113”</span>
+
+    <span class="pl-c">//Adding range of elements</span>
+    <span class="pl-k">var</span> newElements <span class="pl-k">=</span> [];
+    <span class="pl-k">for</span> (<span class="pl-k">var</span> i <span class="pl-k">=</span> <span class="pl-c1">0</span>; i <span class="pl-k">&lt;</span> <span class="pl-c1">5</span>; i<span class="pl-k">++</span>) {
+        newBook <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">xelement.XElement</span>(<span class="pl-s"><span class="pl-pds">"</span>book<span class="pl-pds">"</span></span>);
+        <span class="pl-smi">newBook</span>.<span class="pl-smi">attr</span>.<span class="pl-c1">id</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>bk<span class="pl-pds">"</span></span> <span class="pl-k">+</span> (<span class="pl-c1">113</span> <span class="pl-k">+</span> i).<span class="pl-c1">toString</span>();
+        <span class="pl-smi">newElements</span>.<span class="pl-c1">push</span>(newBook);
+    }
+    <span class="pl-smi">xeleCatalog</span>.<span class="pl-c1">add</span>(newElements);    
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">xeleCatalog</span>.<span class="pl-en">lastElement</span>().<span class="pl-smi">attr</span>.<span class="pl-c1">id</span>) <span class="pl-c">//prints “bk117”    </span></pre></div>
+
+<h4>
+<a id="createelementnamevalue" class="anchor" href="#createelementnamevalue" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>createElement(name,value)</h4>
+
+<p>Create a new element and adds to its child elements. If value parameter is unspecified it will consider as empty.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> newEle <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-c1">createElement</span>(<span class="pl-s"><span class="pl-pds">"</span>TestElement<span class="pl-pds">"</span></span>);
+    <span class="pl-smi">newEle</span>.<span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>100<span class="pl-pds">"</span></span>;  
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">xeleCatalog</span>.<span class="pl-en">lastElement</span>().<span class="pl-c1">name</span>); <span class="pl-c">//prints “TestElement”</span>
+
+    <span class="pl-c">//or</span>
+    <span class="pl-k">var</span> newEle <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-c1">createElement</span>(<span class="pl-s"><span class="pl-pds">"</span>TestElement<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>100<span class="pl-pds">"</span></span>);  
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">newEle</span>.<span class="pl-c1">value</span>); <span class="pl-c">//prints “100”</span></pre></div>
+
+<h4>
+<a id="elementname-ignorecase" class="anchor" href="#elementname-ignorecase" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>element(name, ignoreCase)</h4>
+
+<p>Return the first element with specified name, name is not optional. It returns undefined if doesn’t exist.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> fd <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">element</span>(<span class="pl-s"><span class="pl-pds">'</span>book1<span class="pl-pds">'</span></span>);
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(fd); <span class="pl-c">//prints undefined</span>
+    fd <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">element</span>(<span class="pl-s"><span class="pl-pds">'</span>book<span class="pl-pds">'</span></span>);
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">fd</span>.<span class="pl-c1">name</span>); <span class="pl-c">//prints “book”</span></pre></div>
+
+<h4>
+<a id="getelementsname-ignorecase" class="anchor" href="#getelementsname-ignorecase" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>getElements(name, ignoreCase)</h4>
+
+<p>Return the all elements with specified name, if name unspecified it will return all child elements.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> eles <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">getElements</span>(<span class="pl-s"><span class="pl-pds">'</span>book<span class="pl-pds">'</span></span>, <span class="pl-c1">true</span>); <span class="pl-c">//return all elements with “book” name</span></pre></div>
+
+<h4>
+<a id="getelementvaluename-ignorecase" class="anchor" href="#getelementvaluename-ignorecase" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>getElementValue(name, ignoreCase)</h4>
+
+<p>Return the first element value with specified name, name is not optional.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> vl <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">getElementValue</span>(<span class="pl-s"><span class="pl-pds">"</span>TestElement1<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span>);
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(vl); <span class="pl-c">//prints TestElement1 element value</span></pre></div>
+
+<h4>
+<a id="setelementvaluenamevalue" class="anchor" href="#setelementvaluenamevalue" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>setElementValue(name,value)</h4>
+
+<p>Sets the specified child element value. If element doesn’t exist it will create new.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">setElementValue</span>(<span class="pl-s"><span class="pl-pds">"</span>TestElement<span class="pl-pds">"</span></span>, <span class="pl-c1">1001</span>); 
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">xeleCatalog</span>.<span class="pl-en">getElementValue</span>(<span class="pl-s"><span class="pl-pds">"</span>TestElement<span class="pl-pds">"</span></span>)); <span class="pl-c">//prints 1001</span></pre></div>
+
+<h4>
+<a id="remove" class="anchor" href="#remove" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>remove()</h4>
+
+<p>Remove the current element from its parent. The element will be no longer associated with element tree.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> fd <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">descendantFirst</span>(<span class="pl-s"><span class="pl-pds">'</span>book<span class="pl-pds">'</span></span>);
+    <span class="pl-smi">fd</span>.<span class="pl-en">remove</span>(); <span class="pl-c">//remove the book element from its parent</span></pre></div>
+
+<h4>
+<a id="removeall" class="anchor" href="#removeall" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>removeAll()</h4>
+
+<p>Removes the all child elements. All child elements will be no longer associated with element tree.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> fd <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">descendantFirst</span>(<span class="pl-s"><span class="pl-pds">'</span>book<span class="pl-pds">'</span></span>);
+    <span class="pl-smi">fd</span>.<span class="pl-en">removeAll</span>(); <span class="pl-c">//remove all child element from book element</span></pre></div>
+
+<h4>
+<a id="toxmlstring" class="anchor" href="#toxmlstring" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>toXmlString()</h4>
+
+<p>Converts the xelement into valid xml string. This function is available for each element in the tree thus xml string can be created from any element from the tree.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> fd <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">descendantFirst</span>(<span class="pl-s"><span class="pl-pds">'</span>book<span class="pl-pds">'</span></span>);
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">fd</span>.<span class="pl-en">toXmlString</span>())
+    <span class="pl-c">//prints the following xml</span></pre></div>
+
+<div class="highlight highlight-text-xml"><pre>    &lt;<span class="pl-ent">book</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>bk101<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">author</span>&gt;Gambardella, Matthew&lt;/<span class="pl-ent">author</span>&gt;
+        &lt;<span class="pl-ent">title</span>&gt;XML Developer's Guide&lt;/<span class="pl-ent">title</span>&gt;
+        &lt;<span class="pl-ent">genre</span>&gt;Computer&lt;/<span class="pl-ent">genre</span>&gt;
+        &lt;<span class="pl-ent">price</span>&gt;44.95&lt;/<span class="pl-ent">price</span>&gt;
+        &lt;<span class="pl-ent">publish_date</span>&gt;2000-10-01&lt;/<span class="pl-ent">publish_date</span>&gt;
+        &lt;<span class="pl-ent">description</span>&gt;
+            An in-depth look at creating applications with XML.
+        &lt;/<span class="pl-ent">description</span>&gt;
+    &lt;/<span class="pl-ent">book</span>&gt;</pre></div>
+
+<h3>
+<a id="array-extensions" class="anchor" href="#array-extensions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Array Extensions</h3>
+
+<h5>
+<a id="array-extension-methods-will-facilitate-search-select-foreach-operations-on-collection-of-items" class="anchor" href="#array-extension-methods-will-facilitate-search-select-foreach-operations-on-collection-of-items" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Array extension methods will facilitate search, select, foreach operations on collection of items</h5>
+
+<hr>
+
+<h4>
+<a id="wherefn" class="anchor" href="#wherefn" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>where(fn)</h4>
+
+<p>Is an extension method to an array to enable to apply filter to its collection as array. The default value is [].</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> wr <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">descendants</span>(<span class="pl-s"><span class="pl-pds">"</span>book<span class="pl-pds">"</span></span>).<span class="pl-en">where</span>(<span class="pl-k">function</span> (<span class="pl-smi">o</span>) { <span class="pl-k">return</span> <span class="pl-smi">o</span>.<span class="pl-smi">attr</span>.<span class="pl-c1">id</span> <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">"</span>bk109<span class="pl-pds">"</span></span> });</pre></div>
+
+<h4>
+<a id="selectfn" class="anchor" href="#selectfn" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>select(fn)</h4>
+
+<p>Is an extension method to an array to select any object or object value as array. The default value is [].</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> wr <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">descendants</span>(<span class="pl-s"><span class="pl-pds">"</span>author<span class="pl-pds">"</span></span>).<span class="pl-c1">select</span>(<span class="pl-k">function</span> (<span class="pl-smi">o</span>) { <span class="pl-k">return</span> <span class="pl-smi">o</span>.<span class="pl-c1">value</span>; });</pre></div>
+
+<h4>
+<a id="selectmanyfn" class="anchor" href="#selectmanyfn" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>selectMany(fn)</h4>
+
+<p>Is an extension method to an array to select Many and returns a single array. The default value is [].</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> wr <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">descendants</span>(<span class="pl-s"><span class="pl-pds">"</span>book<span class="pl-pds">"</span></span>).<span class="pl-en">selectMany</span>(<span class="pl-k">function</span> (<span class="pl-smi">o</span>) { <span class="pl-k">return</span> <span class="pl-smi">o</span>.<span class="pl-c1">elements</span> });</pre></div>
+
+<h4>
+<a id="foreachfn" class="anchor" href="#foreachfn" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>forEach(fn)</h4>
+
+<p>Is an extension method to an array to execute operation on each item in the array.</p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> wr <span class="pl-k">=</span> <span class="pl-smi">xeleCatalog</span>.<span class="pl-en">descendants</span>(<span class="pl-s"><span class="pl-pds">"</span>book<span class="pl-pds">"</span></span>);
+    <span class="pl-smi">wr</span>.<span class="pl-en">forEach</span>(<span class="pl-k">function</span> (<span class="pl-smi">o</span>) {
+        <span class="pl-smi">o</span>.<span class="pl-en">setAttr</span>(<span class="pl-s"><span class="pl-pds">'</span>newAttr<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>someValue<span class="pl-pds">'</span></span>);
+        <span class="pl-smi">o</span>.<span class="pl-c1">createElement</span>(<span class="pl-s"><span class="pl-pds">'</span>newElement<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>someValue<span class="pl-pds">'</span></span>);
+    });</pre></div>
+
+<h3>
+<a id="feedback-and-comments" class="anchor" href="#feedback-and-comments" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Feedback and Comments</h3>
+
+<hr>
+
+<p>Please feel free to post your comments on <a href="https://twitter.com/dongariteja">Twitter</a> and issues on <a href="https://github.com/dongariteja/xelement/issues">github</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Xelement maintained by <a href="https://github.com/dongariteja">dongariteja</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
