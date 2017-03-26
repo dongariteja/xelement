@@ -10,13 +10,14 @@ The basic building blocks of this module are XElement class and Parser
 * Parser will create XElement tree from the xml string.
 
 ### Installation for node
-	npm install xelement
+	npm install xelement --save
+
 ### Usage
 ```js
 	var xelement = require('xelement');
 	var xeleRoot = new xelement.Parse("<root><ele1>some value</ele1></root>");
 ```
-### Class
+<a name="XElement"></a><strong>XElement class</strong><br/>
 The main class is XElement which represents the parsed xml, all elements in the XElement tree from root to leaf element are XElement.
 
 #### Members
@@ -63,8 +64,7 @@ Features
 
 
 
-<a name="Parse"></a>
-### Parse(data)
+<a name="Parse"></a><strong>Parse(data)</strong><br/>
 Converts xml string to XElemnt
 ```js
 	var fs = require('fs');
@@ -72,8 +72,7 @@ Converts xml string to XElemnt
 	var xmlString = fs.readFileSync('./sampledata.xml', 'utf8');
 	xeleCatalog = xelement.Parse(xmlString); //parses the xmlString to XElement object representing complete xml element tree
 ```
-<a name="ParseJson"></a>
-### ParseJson(data, elementName)
+<a name="ParseJson"></a><strong>ParseJson(data,elementName)</strong><br/>
 Converts json string or object to XElement
  `elementName`: elementName
 ```js
@@ -94,26 +93,22 @@ You can find sample xml at [here][SampleXml]
 ### Methods
 -----
 
-<a name="descendants"></a>
-#### descendants(name, ignoreCase) 
+<a name="descendants"></a><strong>descendants(name, ignoreCase)</strong><br/> 
 Returns the array of all descendant element with specified name by default parameter is empty on unspecified and it will return all descendant elements, ignoreCase is the flag whether to ignore the case of the element name, by default set to false. On unsuccessful result it will return [].
 ```js
 	var descs = xeleCatalog.descendants('author', true);	//returns all elements with “author” name
 ```
-<a name="descendantsAndSelf"></a>
-#### descendantsAndSelf(name, ignoreCase) 
+<a name="descendantsAndSelf"></a><strong>descendantsAndSelf(name, ignoreCase)</strong><br/>
 Returns the array of all descendant element with specified name and self by default parameter is empty on unspecified and it will return all descendant elements, ignoreCase is the flag whether to ignore the case of the element name, by default set to false. On unsuccessful result it will return [].
 ```js
 	var descs = xeleCatalog.descendantsAndSelf('author', true); //returns all elements with “author” name including self
 ```
-<a name="descendantFirst"></a>
-#### descendantFirst(name, ignoreCase) 
+<a name="descendantFirst"></a><strong>descendantFirst(name, ignoreCase)</strong><br/>
 Returns the first descendant element with specified name, name is not optional , ignoreCase is the flag whether to ignore the case of the element name, by default set to false. On unsuccessful result it will undefined.
 ```js
 	var descs = xeleCatalog.descendantsFirst('author', true); //returns the first element with “author” name
 ```
-<a name="ancestor"></a>
-#### ancestor(name, ignoreCase)
+<a name="ancestor"></a><strong>ancestor(name, ignoreCase)</strong><br/>
 Returns the ancestor parent with specified name. ignoreCase is the flag whether to ignore the case of the element name, by default set to false. On unsuccessful result it will return undefined.
 ```js
 	var author = xele.descendantsFirst('author');
@@ -121,32 +116,28 @@ Returns the ancestor parent with specified name. ignoreCase is the flag whether 
 	var catalog= author.ancestor('catalog');   //return the catalog element
 ```
 
-<a name="firstElement"></a>
-#### firstElement() 
+<a name="firstElement"></a><strong>firstElement()</strong><br/>
 Returns the first child element, returns undefine if doesn’t exist.
 ```js
 	var author = xele.descendantsFirst(book);
 	var author = author.firstElement(); //returns the author element
 ```
 
-<a name="lastElement"></a>
-#### lastElement() 
+<a name="lastElement"></a><strong>lastElement()</strong><br/>
 Returns the last child element, return undefined if doesn’t exist.
 ```js
 	var author = xele.descendantsFirst(book);
 	var description = author.lastElement(); //returns the description element
 ```
 
-<a name="siblings"></a>
-#### siblings(name) 
+<a name="siblings"></a><strong>siblings(name)</strong><br/> 
 Returns the siblings of the element with specified name, if name unspecified it returns all siblings. Return [] if doesn’t exist.
 ```js
 	var author = xele.descendantsFirst('author');
 	var sl[] = xele.siblings(); //returns all sibling elements
 ```
 
-<a name="previousSibling"></a>
-#### previousSibling() 
+<a name="previousSibling"></a><strong>previousSibling()</strong><br/>
 Returns the previous sibling of the element, it returns undefined if doesn’t exist.
 ```js
 	var fd = xeleCatalog.descendantFirst('title', true);
@@ -155,8 +146,7 @@ Returns the previous sibling of the element, it returns undefined if doesn’t e
 	console.log(fd.previousSibling().previousSibling()); //prints undefined
 ```
 
-<a name="nextSibling"></a>
-#### nextSibling()
+<a name="nextSibling"></a><strong>nextSibling()</strong><br/>
 Returns the next sibling of the element, it returns undefined if doesn’t exist.
 ```js
 	var fd = xeleCatalog.descendantFirst('publish_date', true);
@@ -165,16 +155,14 @@ Returns the next sibling of the element, it returns undefined if doesn’t exist
 	console.log(fd.nextSibling().nextSibling()); //prints undefined
 ```
 
-<a name="index"></a>
-#### index()
+<a name="index"></a><strong>index()</strong><br/>
 Returns the index of the element among its sibling. Index starts from 0. It returns undefined if the element is not a child other element.
 ```js
 	var fd = xeleCatalog.elements.where(function (o) { return o.attr.id == "bk104"; });
 	console.log(fd[0].index()); //prints 3
 ```
 
-<a name="setAttr"></a>
-#### setAttr(name, value)
+<a name="setAttr"></a><strong>setAttr(name, value)</strong><br/>
 Sets the value to specified attribute of the element. If the attribute doesn’t exist, it will create.
 ```js
 	var fd = xeleCatalog.descendantFirst('book');
@@ -182,8 +170,7 @@ Sets the value to specified attribute of the element. If the attribute doesn’t
 	console.log(fd.attr.NewAttr); //prints “100”   
 ```
 
-<a name="getAttr"></a>
-#### getAttr(name)
+<a name="getAttr"></a><strong>getAttr(name)</strong><br/>
 Returns the value from specified attribute of the element. If the attribute doesn’t exist it will return empty.
 ```js
 	var fd = xeleCatalog.descendantFirst('book');
@@ -192,8 +179,7 @@ Returns the value from specified attribute of the element. If the attribute does
 	console.log(fd.getAttr('yyy')); //prints empty
 ```
 
-<a name="removeAttr"></a>
-#### removeAttr(name)
+<a name="removeAttr"></a><strong>removeAttr(name)</strong><br/>
 Remove the specified attribute from the element.
 ```js
 	var fd = xeleCatalog.descendantFirst('book');
@@ -202,8 +188,7 @@ Remove the specified attribute from the element.
 	console.log(fd.getAttr('NewAttr')); //prints empty
 ```
 
-<a name="add"></a>
-#### add(obj)
+<a name="add"></a><strong>add(obj)</strong><br/>
 Adds xelement as its child element. Single or array of xelement can be passed. Only valid xelement object will be added and others ignored.
 ```js
 	var dummy = {};
@@ -227,8 +212,7 @@ Adds xelement as its child element. Single or array of xelement can be passed. O
 	console.log(xeleCatalog.lastElement().attr.id) //prints “bk117”    
 ```
 
-<a name="createElement"></a>
-#### createElement(name,value)
+<a name="createElement"></a><strong>createElement(name,value)</strong><br/>
 Create a new element and adds to its child elements. If value parameter is unspecified it will consider as empty.
 ```js
 	var newEle = xeleCatalog.createElement("TestElement");
@@ -240,8 +224,7 @@ Create a new element and adds to its child elements. If value parameter is unspe
 	console.log(newEle.value); //prints “100”
 ```
 
-<a name="element"></a>
-#### element(name, ignoreCase)
+<a name="element"></a><strong>element(name, ignoreCase)</strong><br/>
 Return the first element with specified name, name is not optional. It returns undefined if doesn’t exist.
 ```js
 	var fd = xeleCatalog.element('book1');
@@ -250,63 +233,55 @@ Return the first element with specified name, name is not optional. It returns u
 	console.log(fd.name); //prints “book”
 ```
 
-<a name="getElements"></a>
-#### getElements(name, ignoreCase)
+<a name="getElements"></a><strong>getElements(name, ignoreCase)</strong><br/>
 Return the all elements with specified name, if name unspecified it will return all child elements.
 ```js
 	var eles = xeleCatalog.getElements('book', true); //return all elements with “book” name
 ```
 
-<a name="getElementValue"></a>	
-#### getElementValue(name, ignoreCase)
+<a name="getElementValue"></a><strong>getElementValue(name, ignoreCase)</strong><br/>
 Return the first element value with specified name, name is not optional.
 ```js
 	var vl = xeleCatalog.getElementValue("TestElement1", true);
 	console.log(vl); //prints TestElement1 element value
 ```
 
-<a name="setElementValue"></a>
-#### setElementValue(name,value)
+<a name="setElementValue"></a><strong>setElementValue(name,value)</strong><br/>
 Sets the specified child element value. If element doesn’t exist it will create new.
 ```js
 	xeleCatalog.setElementValue("TestElement", 1001); 
 	console.log(xeleCatalog.getElementValue("TestElement")); //prints 1001
 ```
 
-<a name="hasElements"></a>
-#### hasElements
+<a name="hasElements"></a><strong>hasElements</strong><br/>
 return true if the element has any child elements.
 ```js
 	if(xeleCatalog.hasElements)
 	console.log('has elements'); 
 ```
 
-<a name="hasAttr"></a>
-#### hasAttr
+<a name="hasAttr"></a><strong>hasAttr</strong><br/>
 return true if the element has any attribues.
 ```js
 	if(xeleCatalog.hasAttr)
 	console.log('has attribues'); 
 ```
 
-<a name="remove"></a>
-#### remove()
+<a name="remove"></a><strong>remove()</strong><br/>
 Remove the current element from its parent. The element will be no longer associated with element tree.
 ```js
 	var fd = xeleCatalog.descendantFirst('book');
 	fd.remove(); //remove the book element from its parent
 ```
 
-<a name="removeAll"></a>
-#### removeAll()
+<a name="removeAll"></a><strong>removeAll()</strong><br/>
 Removes the all child elements. All child elements will be no longer associated with element tree.
 ```js
 	var fd = xeleCatalog.descendantFirst('book');
 	fd.removeAll(); //remove all child element from book element
 ```
 
-<a name="toXmlString"></a>
-#### toXmlString()
+<a name="toXmlString"></a><strong>toXmlString()</strong><br/>
 Converts the xelement into valid xml string. This function is available for each element in the tree thus xml string can be created from any element from the tree.
 ```js
 	var fd = xeleCatalog.descendantFirst('book');
@@ -326,8 +301,7 @@ Converts the xelement into valid xml string. This function is available for each
 	</book>
 ```
 
-<a name="toJSON"></a>
-#### toJSON(options)
+<a name="toJSON"></a><strong>toJSON(options)</strong><br/>
 Converts the xelement into JSON object. This function is available for each element in the tree thus JSON object can be created from any element from the tree.  
  `options` : {
 	includeAttributes : true/false to specifiy to include attrubes in the JSON. default value is fale
@@ -351,34 +325,29 @@ Converts the xelement into JSON object. This function is available for each elem
 	}
 ```
 
-<a name="ArrayExtensions"></a>
-### Array Extensions
-##### Array extension methods will facilitate search, select, foreach operations on collection of items
+<a name="ArrayExtensions"></a><strong>Array Extensions</strong><br/>
+Array extension methods will facilitate search, select, foreach operations on collection of items
 ------
 
-<a name="where"></a>
-#### where(fn)
+<a name="where"></a><strong>where(fn)</strong><br/>
 Is an extension method to an array to enable to apply filter to its collection as array. The default value is [].
 ```js
 	var wr = xeleCatalog.descendants("book").where(function (o) { return o.attr.id == "bk109" });
 ```
 
-<a name="select"></a>
-#### select(fn)
+<a name="select"></a><strong>select(fn)</strong><br/>
 Is an extension method to an array to select any object or object value as array. The default value is [].
 ```js
 	var wr = xeleCatalog.descendants("author").select(function (o) { return o.value; });
 ```
 
-<a name="selectMany"></a>
-#### selectMany(fn)
+<a name="selectMany"></a><strong>selectMany(fn)</strong><br/>
 Is an extension method to an array to select Many and returns a single array. The default value is [].
 ```js
 	var wr = xeleCatalog.descendants("book").selectMany(function (o) { return o.elements });
 ```
 
-<a name="forEach"></a>
-#### forEach(fn)
+<a name="forEach"></a><strong>forEach(fn)</strong><br/>
 Is an extension method to an array to execute operation on each item in the array.
 ```js
 	var wr = xeleCatalog.descendants("book");
