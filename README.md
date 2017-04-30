@@ -1,21 +1,28 @@
 [![Build Status](https://travis-ci.org/dongariteja/xelement.svg?branch=master)](https://travis-ci.org/dongariteja/xelement)
 
 # xelement
-#### _A powerful xelement (Xml Element) class to parse xml for JavaScript._
+#### _A powerful JavaScript xelement (Xml Element) class to parse xml for NodeJs and Browser (Typescript included)._
 ***
 `xelement` represents an xml element. You can use this class to create or parse xml string to xml element. It allows to add, edit and delete any element or its attributes within the element tree and serialize the entire element to string from. You can search through the element and can traverse the element tree up and downwards.
 
 The basic building blocks of this module are XElement class and Parser
 * XElement class represents each element in the xml element tree.
-* Parser will create XElement tree from the xml string.
+* Parse will create XElement tree from the xml string.
+* ParseJson will create XElement tree from JSON string or JSON object.
 
 ### Installation for node
 	npm install xelement --save
 
 ### Usage
 ```js
-	var xelement = require('xelement');
-	var xeleRoot = new xelement.Parse("<root><ele1>some value</ele1></root>");
+	
+	var xelement = require('xelement');	
+	var xeleRoot = xelement.Parse("<root><ele1>some value</ele1></root>"); //Parsing from xml string
+	//or	
+	var xeleRoot = xelement.ParseJson({ name : "teja" , place : "Hyderabad"} ); //Parsing from JSON Object
+	//or
+	var xeleRoot = xelement.ParseJson('{ "name" : "teja", "place" : "Hyderabad" }'); //Parsing from JSON string	
+	
 ```
 <a name="XElement"></a><strong>XElement class</strong><br/>
 The main class is XElement which represents the parsed xml, all elements in the XElement tree from root to leaf element are XElement.
@@ -81,7 +88,7 @@ Converts json string or object to XElement
 		"location" : "hyderabad"
 	}
 
-	var xelement = require('xelement');
+	var xelement = require('xelement', "elementRootName");
 		xeleCatalog = xelement.ParseJson(obj); //parses the Json string/object to XElement object representing complete xml element tree	
 
 ```
