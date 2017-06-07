@@ -113,12 +113,12 @@ Returns the array of all descendant element with specified name and self by defa
 <a name="descendantFirst"></a><strong>descendantFirst(name, ignoreCase)</strong><br/>
 Returns the first descendant element with specified name, name is not optional , ignoreCase is the flag whether to ignore the case of the element name, by default set to false. On unsuccessful result it will undefined.
 ```js
-	var descs = xeleCatalog.descendantsFirst('author', true); //returns the first element with “author” name
+	var descs = xeleCatalog.descendantFirst('author', true); //returns the first element with “author” name
 ```
 <a name="ancestor"></a><strong>ancestor(name, ignoreCase)</strong><br/>
 Returns the ancestor parent with specified name. ignoreCase is the flag whether to ignore the case of the element name, by default set to false. On unsuccessful result it will return undefined.
 ```js
-	var author = xele.descendantsFirst('author');
+	var author = xele.descendantFirst('author');
 	var book = author.ancestor('book'); //returns the book element
 	var catalog= author.ancestor('catalog');   //return the catalog element
 ```
@@ -126,21 +126,21 @@ Returns the ancestor parent with specified name. ignoreCase is the flag whether 
 <a name="firstElement"></a><strong>firstElement()</strong><br/>
 Returns the first child element, returns undefine if doesn’t exist.
 ```js
-	var author = xele.descendantsFirst(book);
+	var author = xele.descendantFirst(book);
 	var author = author.firstElement(); //returns the author element
 ```
 
 <a name="lastElement"></a><strong>lastElement()</strong><br/>
 Returns the last child element, return undefined if doesn’t exist.
 ```js
-	var author = xele.descendantsFirst(book);
+	var author = xele.descendantFirst(book);
 	var description = author.lastElement(); //returns the description element
 ```
 
 <a name="siblings"></a><strong>siblings(name)</strong><br/> 
 Returns the siblings of the element with specified name, if name unspecified it returns all siblings. Return [] if doesn’t exist.
 ```js
-	var author = xele.descendantsFirst('author');
+	var author = xele.descendantFirst('author');
 	var sl[] = xele.siblings(); //returns all sibling elements
 ```
 
@@ -310,9 +310,13 @@ Converts the xelement into valid xml string. This function is available for each
 
 <a name="toJSON"></a><strong>toJSON(options)</strong><br/>
 Converts the xelement into JSON object. This function is available for each element in the tree thus JSON object can be created from any element from the tree.  
- `options` : {
-	includeAttributes : true/false to specifiy to include attrubes in the JSON. default value is fale
- }
+ 
+ ```js
+	var options = {	
+		includeAttributes : false, // to specifiy to include attrubes in the JSON. default value is fale
+		removeRoot :false // to specifiy to exclude root in the JSON. default value is fale
+	}
+ ```
 
 ```js
 	var fd = xeleCatalog.descendantFirst('book');
